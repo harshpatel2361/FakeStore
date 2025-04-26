@@ -1,0 +1,13 @@
+export const color = {
+  primary: '#102E50',
+  secondary: '#F5C45E',
+  textColor: '#222222',
+  black: '#000000',
+  white: '#ffffff',
+  grey: '#3F4F44',
+  error: 'rgba(225, 25, 25,1)',
+  success: 'rgba(8, 91,54, 1)',
+  customTransparent: opacity => `rgba(0, 0, 0,${opacity ?? 1})`,
+  customWhite: opacity => `rgba(255, 255, 255,${opacity ?? 1})`,
+  customBlack: opacity => `rgba(0, 0, 0,${opacity ?? 1})`,
+}
