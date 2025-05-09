@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { View, Text, StatusBar, StyleSheet, ActivityIndicator, ScrollView, Image } from 'react-native'
 import { useNavigation, useRoute } from '@react-navigation/native'
+import axios from 'axios'
+import { useDispatch } from 'react-redux'
 import { Ionicons } from '@expo/vector-icons'
 
 import { color } from '../constants'
-import { Button, Header } from '../components'
-import axios from 'axios'
+import { Button, Header, showToast } from '../components'
+import { addToCart } from '../redux/slices/CartSlice'
 
 export const ProductDetailScreen = () => {
 
   const route = useRoute();
   const navigation = useNavigation();
+  const dispatch = useDispatch()
   const [loading, setLoading] = useState(false);
   const [productDetails, setProductDetails] = useState(null);
 
@@ -26,12 +29,20 @@ export const ProductDetailScreen = () => {
         setProductDetails(response?.data);
       } else {
         console.log('Error fetching product details', response.statusText);
+       showToast({
+          type: 'error',
+          text1: 'Something went wrong.Please try again'
+        })
       }
     } catch (error) {
       console.log("Error fetching product details::", error)
     } finally {
       setLoading(false);
     }
+  }
+
+  const handleAddToCartPress = () => {
+    dispatch(addToCart(productDetails));
   }
 
   useEffect(() => {
@@ -71,7 +82,7 @@ export const ProductDetailScreen = () => {
                 </View>
               </ScrollView>
               <View style={styles.bottomView}>
-                <Button showLeftcon leftIcon={() => (<Ionicons name='cart' size={30} color={color.white} />)} btnLabel='add to cart' />
+                <Button showLeftcon leftIcon={() => (<Ionicons name='cart' size={30} color={color.white} />)} btnLabel='add to cart' onPress={handleAddToCartPress} />
               </View>
             </View>
           )

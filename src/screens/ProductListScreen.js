@@ -64,7 +64,6 @@ export const ProductListScreen = () => {
               </View>
             )
           )
-
         }
       </View>
     </View>

@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { View, StatusBar, StyleSheet, FlatList, TouchableOpacity, Text, ActivityIndicator } from 'react-native'
-import { Ionicons } from '@expo/vector-icons'
+import { useNavigation } from '@react-navigation/native'
+import axios from 'axios'
 
 import { Header } from '../components'
 import { color } from '../constants'
-import axios from 'axios'
-import { useNavigation } from '@react-navigation/native'
 
 export const CategoryListScreen = () => {
 

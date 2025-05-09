@@ -1,22 +1,20 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { SafeAreaView } from 'react-native';
+import { toastConfig } from './src/constants/toastConfig';
+import Toast from 'react-native-toast-message';
+import { Provider } from 'react-redux';
 
-import { CategoryListScreen, ProductDetailScreen, ProductListScreen } from './src/screens';
-
-const Stack = createNativeStackNavigator();
+import { MainStackNavigation, } from './src';
+import { store } from './src/redux';
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{
-        headerShown: false
-      }} >
-        <Stack.Screen name="categoryListScreen" component={CategoryListScreen} />
-        <Stack.Screen name="productListScreen" component={ProductListScreen} />
-        <Stack.Screen name="productDetailScreen" component={ProductDetailScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <SafeAreaView style={{ flex: 1 }}>
+        <MainStackNavigation />
+        <Toast toastConfig={toastConfig}/>
+      </SafeAreaView>
+    </Provider>
   );
 }
 
