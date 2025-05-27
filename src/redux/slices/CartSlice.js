@@ -14,10 +14,11 @@ const cartSlice = createSlice({
     addToCart: (state, action) => {
       const item = action.payload;
       const existingItem = state.cartItems?.find(i => i?.id === item?.id);
+      const titleEllipsis = item.title.length > 7 ? item.title.slice(0,10)+"...":item.title;
       if (existingItem) {
         showToast({
           type: 'error',
-          text1: `${item?.title} already exists in cart`,
+          text1: `${titleEllipsis} already exists in cart`,
           position: 'top'
         })
       } else {
@@ -26,7 +27,7 @@ const cartSlice = createSlice({
         state.totalPrice += item.price
         showToast({
           type: 'success',
-          text1: `${item?.title} added to cart`,
+          text1: `${titleEllipsis} added to cart`,
           position: 'top'
         })
       }
@@ -37,7 +38,7 @@ const cartSlice = createSlice({
       if (item) {
         state.totalQuantity -= item?.quantity;
         state.totalPrice -= item?.price
-        state.cartItems.filter(i => i.id !== item.id);
+        state.cartItems = state.cartItems.filter(i => i.id !== item.id);
         showToast({
           type: 'success',
           text1: `${item?.title} removed from cart`
@@ -56,7 +57,7 @@ const cartSlice = createSlice({
     decrementQuantity: (state, action) => {
       const id = action.payload;
       const item = state.cartItems.find(i => i.id === id);
-      
+
       if (item.quantity > 1) {
         item.quantity -= 1;
         state.totalQuantity -= 1;
@@ -75,10 +76,6 @@ const cartSlice = createSlice({
       state.cartItems = [];
       state.totalQuantity = 0;
       state.totalPrice = 0;
-      showToast({
-        type: 'success',
-        text1: 'Removed all products from Cart'
-      })
     }
   }
 })

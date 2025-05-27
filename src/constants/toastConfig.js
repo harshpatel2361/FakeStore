@@ -12,6 +12,14 @@ export const toastConfig = {
       text1Style={{
         fontSize: 16,
         fontWeight: 'bold',
+        flexWrap: 'wrap',
+        width: deviceWidth - 60,
+      }}
+      text2Style={{
+        fontSize: 14,
+        color: '#333',
+        flexWrap: 'wrap',
+        width: deviceWidth - 60,
       }}
     />
   ),
@@ -23,10 +31,14 @@ export const toastConfig = {
       text1Style={{
         fontSize: 16,
         fontWeight: 'bold',
+        flexWrap: 'wrap',
+        width: deviceWidth - 60,
       }}
       text2Style={{
         fontSize: 14,
         color: '#333',
+        flexWrap: 'wrap',
+        width: deviceWidth - 60,
       }}
     />
   ),
@@ -38,10 +50,14 @@ export const toastConfig = {
       text1Style={{
         fontSize: 16,
         fontWeight: 'bold',
+        flexWrap: 'wrap',
+        width: deviceWidth - 60,
       }}
       text2Style={{
         fontSize: 14,
         color: '#333',
+        flexWrap: 'wrap',
+        width: deviceWidth - 60,
       }}
     />
   ),

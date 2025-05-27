@@ -6,6 +6,7 @@ export const showToast = ({
   text1,
   text2,
   position = 'top',
+  topOffset,
   visibilityTime = 3000,
   swipeable = true,
 }) => {
@@ -19,6 +20,7 @@ export const showToast = ({
     },
     text2,
     position,
+    topOffset: topOffset || 100,
     visibilityTime,
     swipeable,
   });

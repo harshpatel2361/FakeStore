@@ -3,9 +3,9 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { color } from '../constants'
 import { Ionicons } from '@expo/vector-icons'
 
-export const Button = ({ onPress, activeOpacity, btnLabel, showLeftcon, leftIcon, leftIconSize, leftIconColor, showRightIcon, rightIcon, rightIconColor, rightIconSize }) => {
+export const Button = ({ onPress, btnStyle, activeOpacity, btnLabel, showLeftcon, leftIcon, leftIconSize, leftIconColor, showRightIcon, rightIcon, rightIconColor, rightIconSize }) => {
   return (
-    <TouchableOpacity style={styles.button} onPress={onPress} activeOpacity={activeOpacity || 0.6}>
+    <TouchableOpacity style={[styles.button, btnStyle]} onPress={onPress} activeOpacity={activeOpacity || 0.6}>
       {showLeftcon && leftIcon()}
       <Text style={styles.buttonText}>{btnLabel}</Text>
       {showRightIcon && rightIcon()}
@@ -26,7 +26,10 @@ const styles = StyleSheet.create({
   buttonText: {
     color: color.white,
     fontSize: 20,
+    fontFamily: 'mnstSemiBold',
     letterSpacing: 1,
     textTransform: 'uppercase'
   }
 })
+
+

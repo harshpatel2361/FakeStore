@@ -1,7 +1,7 @@
-import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import React from "react";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 
-import { color } from '../constants';
+import { color } from "../constants";
 
 export const Header = ({
   headerWithTitle,
@@ -17,27 +17,31 @@ export const Header = ({
   rightIconPress,
   title,
 }) => {
-
   return (
     <View style={[styles.rootContainer, headerStyle]}>
       {!leftIcon ? null : (
-        <TouchableOpacity onPress={leftIconPress} style={styles.headerLeftIcon}>{headerLeftIcon()}</TouchableOpacity>
+        <TouchableOpacity onPress={leftIconPress} style={styles.headerLeftIcon}>
+          {headerLeftIcon()}
+        </TouchableOpacity>
       )}
       {title ? (
         <View style={[styles.titleContainer, headerTitleView]}>
           {headerWithTitle && (
             <Text
-              style={[
-                styles.headerTitleTextStyle,
-                headerTitleTextCustomStyle,
-              ]}>
-              {headerTitle }
+              style={[styles.headerTitleTextStyle, headerTitleTextCustomStyle]}
+            >
+              {headerTitle}
             </Text>
           )}
         </View>
       ) : null}
       {!rightIcon ? null : (
-        <TouchableOpacity onPress={rightIconPress} style={styles.headerRightIcon}>{headerRightIcon()}</TouchableOpacity>
+        <TouchableOpacity
+          onPress={rightIconPress}
+          style={styles.headerRightIcon}
+        >
+          {headerRightIcon()}
+        </TouchableOpacity>
       )}
     </View>
   );
@@ -46,9 +50,9 @@ export const Header = ({
 const styles = StyleSheet.create({
   rootContainer: {
     backgroundColor: color.secondary,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
     height: 70,
     elevation: 10,
     zIndex: 1,
@@ -62,29 +66,30 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center",
   },
   headerLeftIcon: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
-    width: '50',
-    position: 'absolute',
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+    width: "50",
+    position: "absolute",
     left: 0,
   },
   headerRightIcon: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100%',
-    width: '50',
-    position: 'absolute',
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+    width: "50",
+    position: "absolute",
     right: 0,
   },
   headerTitleTextStyle: {
     color: color.textColor,
     fontSize: 30,
-    textTransform: 'uppercase',
-    letterSpacing: 1
-  }
-})
+    textTransform: "uppercase",
+    letterSpacing: 1,
+    fontFamily: 'mnstSemiBold'
+  },
+});

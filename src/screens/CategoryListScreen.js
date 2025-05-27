@@ -3,7 +3,7 @@ import { View, StatusBar, StyleSheet, FlatList, TouchableOpacity, Text, Activity
 import { useNavigation } from '@react-navigation/native'
 import axios from 'axios'
 
-import { Header } from '../components'
+import { Header, LoaderScreen } from '../components'
 import { color } from '../constants'
 
 export const CategoryListScreen = () => {
@@ -15,11 +15,14 @@ export const CategoryListScreen = () => {
   const fetchCategoriesFromServer = async () => {
     setLoading(true);
     try {
-      const response = await axios.get('https://fakestoreapi.com/products/categories', {
+      const options = {
+        url: 'https://fakestoreapi.com/products/categories',
+        method: 'GET',
         headers: {
-          'Content-Type': 'application/json',
-        }
-      });
+          "Content-Type": "application/json",
+        },
+      }
+      const response = await axios(options);
       if (response?.status == 200) {
         setCategories(response?.data);
       } else {
@@ -51,15 +54,13 @@ export const CategoryListScreen = () => {
 
   if (loading) {
     return (
-      <View style={styles.loading}>
-        <ActivityIndicator color={[color.primary, color.secondary]} size='large' />
-      </View>
+      <LoaderScreen />
     )
   }
 
   return (
     <View style={styles.mainView}>
-      <StatusBar backgroundColor={color.secondary} barStyle='light-content' />
+      <StatusBar translucent={false} backgroundColor={color.secondary} barStyle='dark-content' />
       <Header title headerWithTitle headerTitle='Categories' />
       <View style={{ flex: 1 }}>
         {
@@ -111,8 +112,8 @@ const styles = StyleSheet.create({
   listItemText: {
     fontSize: 20,
     color: color.textColor,
-    fontWeight: '700',
-    textTransform: 'capitalize'
+   fontFamily: 'mnstSemiBold',
+    textTransform: 'uppercase'
   },
   emptyView: {
     flex: 1,

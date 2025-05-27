@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, StatusBar, FlatList, ActivityIndicator } from '
 import React, { useEffect, useState } from 'react'
 import { useNavigation, useRoute } from '@react-navigation/native'
 import { color } from '../constants';
-import { Header, ProductCard } from '../components';
+import { Header, LoaderScreen, ProductCard } from '../components';
 import { Ionicons } from '@expo/vector-icons';
 import axios from 'axios';
 
@@ -15,11 +15,14 @@ export const ProductListScreen = () => {
   const fetchProductListBasedOnCategory = async (categoryName) => {
     setLoading(true);
     try {
-      const response = await axios.get(`https://fakestoreapi.com/products/category/${categoryName}`, {
+       const options = {
+        url: `https://fakestoreapi.com/products/category/${categoryName}`,
+        method: 'GET',
         headers: {
-          'Content-Type': 'application/json',
-        }
-      });
+          "Content-Type": "application/json",
+        },
+      }
+      const response = await axios(options);
       if (response.status == 200) {
         setProductList(response?.data);
       } else[
@@ -47,14 +50,12 @@ export const ProductListScreen = () => {
 
   return (
     <View style={styles.mainView}>
-      <StatusBar backgroundColor={color.secondary} barStyle='light-content' />
+      <StatusBar translucent={false} backgroundColor={color.secondary} barStyle='dark-content' />
       <Header title headerWithTitle headerTitle={route?.params?.categoryName} leftIcon headerLeftIcon={() => <Ionicons name='arrow-back-outline' size={30} color={color.primary} />} leftIconPress={() => navigation.goBack()} />
       <View style={{ flex: 1 }}>
         {
           loading ? (
-            <View style={styles.loading}>
-              <ActivityIndicator color={[color.primary, color.secondary]} size='large' />
-            </View>
+            <LoaderScreen />
           ) : (
             productList?.length > 0 ? (
               <FlatList contentContainerStyle={styles.flatList} data={productList} renderItem={renderProductItemList} />
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
   emptyViewText: {
     fontSize: 30,
     color: color.primary,
-    fontWeight: '900'
+    fontFamily: 'mnstBlack'
   },
   flatList: {
     paddingTop: 10,
@@ -98,3 +99,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 })
+
